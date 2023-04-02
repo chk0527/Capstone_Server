@@ -12,7 +12,7 @@ import java.util.List;
 public class Controller {
     @RequestMapping("/")
     public String index() {
-        return "Test Message";
+        return "Test Message22222";
     }
 
     @Autowired
