@@ -1,31 +1,52 @@
 package com.example.capstone_server;
 
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
+
 
 @RestController
+@RequiredArgsConstructor
 public class Controller {
+
     @RequestMapping("/")
     public String index() {
         return "Test Message22222";
     }
 
     @Autowired
-    private UserService userService;
+    final UserService userService;
 
-    @GetMapping("/users")
-    public List<User> getAllUsers() {
-        return userService.getAllUsers();
+    final UserRepository userRepository;
+
+    @GetMapping("/data")
+    public List<Integer> getData() {
+        return userRepository.findTimeStampByNameAndObject();
     }
 
-    @GetMapping("/{id}")
-    public User getUserById(@PathVariable Long id) {
-        return userService.getUserById(id);
+    @GetMapping("/dataall/")
+    public List<User> getData2() {
+        return userRepository.findByNameAndObject();
     }
+
+    @GetMapping("/alldata")
+    public List<User> getData3() {
+        return userRepository.findAllData();
+    }
+
+
 }
+
+
+
+
+
+
+
+
 
